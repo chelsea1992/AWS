@@ -7,7 +7,7 @@ if __name__ == "__main__":
     json_file = sys.argv[1]
     json_data = json.load(open(json_file))['data']
     dynamodb = boto3.resource('dynamodb')
-    # table = dynamodb.Table('inf551_hw4')
+    #table = dynamodb.Table('inf551_hw4')
     table = dynamodb.create_table(
         TableName = 'inf551_hw4',
         KeySchema = [
@@ -21,6 +21,8 @@ if __name__ == "__main__":
                 'AttributeName': 'id',
                 'AttributeType': 'N'
             },
+
+
         ],
 
         ProvisionedThroughput={
@@ -36,6 +38,7 @@ if __name__ == "__main__":
         for item in json_data:
             year = str(item[9]).split('-')[0]
             count += 1
+            print int(item[13])
             batch.put_item(
                 Item={
                     'id': item[0],
@@ -46,9 +49,12 @@ if __name__ == "__main__":
             )
             if count == 1000:
                 break
+    
+ 
 
-    print "print done"
-    print(table.item_count)
+
+
+
 
 
 
