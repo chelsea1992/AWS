@@ -1,0 +1,4 @@
+david	46
+mary	36
+john	56
+bill	46
